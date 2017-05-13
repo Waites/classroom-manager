@@ -1,9 +1,14 @@
 var express = require("express");
-var mongoose = require("mongoose");
 var app = express();
+var mongoose = require("mongoose");
+var morgan = require("morgan");
+
+// config
 mongoose.connect("mongodb://localhost/classman");
 
-var studentSchema = new mongoose.Schema({
+
+// Models
+var Student = mongoose.model("Student", {
 	fname: String,
 	lname: String,
 	absents: Number,
@@ -12,18 +17,30 @@ var studentSchema = new mongoose.Schema({
 	seaty: Number
 });
 
-var student = mongoose.model("Student", studentSchema);
 
 app.get("/", function(req, res){
 	res.send("works");
 });
 
 app.get("/table", function(req, res){
-	res.send("Table Data Here");
+	console.log("parsing students")
+	Student.find(function(err,students){
+		if(err){
+			res.send(err)
+		}
+		res.json(students);
+	});
+	
 });
 
 app.get("/seatchart", function(req, res){
-	res.send("Seat Data Here");
+		console.log("parsing students")
+	Student.find(function(err,students){
+		if(err){
+			res.send(err)
+		}
+		res.json(students);
+	});
 });
 
 app.get("*", function(req,res){
