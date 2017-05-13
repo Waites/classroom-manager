@@ -23,7 +23,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/table", function(req, res){
-	console.log("parsing students")
+	console.log("parsing students table view")
 	Student.find(function(err,students){
 		if(err){
 			res.send(err)
@@ -34,7 +34,7 @@ app.get("/table", function(req, res){
 });
 
 app.get("/seatchart", function(req, res){
-		console.log("parsing students")
+		console.log("parsing seating chart")
 	Student.find(function(err,students){
 		if(err){
 			res.send(err)
